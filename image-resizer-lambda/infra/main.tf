@@ -78,13 +78,18 @@ resource "aws_lambda_function" "image_resizer" {
   role          = aws_iam_role.lambda_role.arn
   handler       = "index.handler"
   runtime       = "nodejs20.x"
+  architectures = ["arm64"]
 
   memory_size = 1024
   timeout     = 30
 
   environment {
     variables = {
-      BUCKET_NAME = "waitque-upload-bucket"
+      BUCKET_NAME = "waitque-upload-bucket",
+      KEYCLOAK_CLIENT_ID = "waitque-lambda",
+      KEYCLOAK_CLIENT_SECRET = "${var.customer_service_client_secret}"
+      KEYCLOAK_BASE_URL = "${var.keycloak_base_url}"
+      COMPANY_SERVICE_BASE_URL = "${var.company_service_base_url}"
     }
   }
 }
