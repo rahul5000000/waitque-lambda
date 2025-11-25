@@ -59,7 +59,8 @@ exports.handler = async (event) => {
 
             console.log(`Successfully created thumbnail: ${destKey}`);
 
-            const companyId = 1;
+            const keyParts = key.split("/");
+            const companyId = keyParts[2];
             const token = await getAccessToken();
 
             const response = await fetch(
