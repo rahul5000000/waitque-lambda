@@ -40,11 +40,12 @@ exports.handler = async (event) => {
             // Resize to exactly 100×100 (cover = crop to fill, center by default)
             const resizedBuffer = await sharp(originalBuffer)
                 .resize(TARGET_SIZE, TARGET_SIZE, {
-                    fit: 'cover',
-                    position: 'centre' // or 'entropy' for smart crop
+                    fit: "cover",
+                    position: "centre"
                 })
-                .jpeg({ quality: 85 })          // always output as JPEG for thumbnails
+                .webp({ quality: 90 })
                 .toBuffer();
+
 
             // Upload thumbnail
             await s3Client.send(
@@ -52,7 +53,7 @@ exports.handler = async (event) => {
                     Bucket: bucket,
                     Key: destKey,
                     Body: resizedBuffer,
-                    ContentType: 'image/jpeg',
+                    ContentType: 'image/webp',
                     CacheControl: 'max-age=31536000' // optional: cache thumbnails for 1 year
                 })
             );
