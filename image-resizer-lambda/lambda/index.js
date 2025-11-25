@@ -16,9 +16,9 @@ exports.handler = async (event) => {
         const bucket = record.s3.bucket.name;
         const key = decodeURIComponent(record.s3.object.key.replace(/\+/g, ' '));
 
-        // Safety check - only process files in RAW/ (S3 filter should already enforce this)
-        if (!key.startsWith('RAW/')) {
-            console.log(`Skipping ${key} - not in RAW/ prefix`);
+        // Safety check - only process files in RAW/logo/ (S3 filter should already enforce this)
+        if (!key.startsWith('RAW/logo/')) {
+            console.log(`Skipping ${key} - not in RAW/logo/ prefix`);
             continue;
         }
 

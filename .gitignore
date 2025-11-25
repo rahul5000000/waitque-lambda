@@ -33,3 +33,4 @@ pnpm-debug.log*
 .env.production.local
 
 terraform.tfvars
+lambda_package.zip
