@@ -1,0 +1,3 @@
+**/.terraform/*
+terraform.tfvars
+lambda/node_modules/
